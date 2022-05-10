@@ -4,6 +4,6 @@ const getListStudents = () => {
     { id: 2, firstName: 'James', location: 'Columbia' },
     { id: 5, firstName: 'Serena', location: 'San Fransisco' },
   ];
-  return getListStudents;
+  return student;
 };
 export default getListStudents;
