@@ -1,7 +1,20 @@
 #!/usr/bin/env python3
+"""
+    Mixed Tuple
+"""
+from typing import Union, Tuple
 
-from typing import Tuple, Union
 
-def to_kv(k: str, v: Union[float, int]) -> Tuple[float, str]:
+def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
+    """
+        Args:
+            k: String
+            v: Union: Can be int or float
+        Return:
+            Tuple with string and int or float
+    """
 
-    return (k, v * v)
+    cncat: Tuple(str, Union[int, float])
+    cncat = (k, v**2)
+
+    return cncat
