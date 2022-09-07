@@ -17,6 +17,7 @@ class MRUCache(BaseCaching):
         """
         super().__init__()
         self.leastrecent = []
+
     def put(self, key, item):
         """
         modify cache data
@@ -40,6 +41,7 @@ class MRUCache(BaseCaching):
                 self.leastrecent.append(key)
 
             self.cache_data[key] = item
+
     def get(self, key):
         """
         modify cache data
