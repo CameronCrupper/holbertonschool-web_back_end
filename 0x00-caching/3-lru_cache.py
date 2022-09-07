@@ -9,7 +9,7 @@ from base_caching import BaseCaching
 
 class LRUCache(BaseCaching):
     """
-    
+    defines LRU algo to use cache
     """
     def __init__(self):
         """
@@ -20,7 +20,7 @@ class LRUCache(BaseCaching):
 
     def put(self, key, item):
         """
-        
+        modify cache data
         """
         if key or item is not None:
             valuecache = self.get(key)
@@ -41,7 +41,7 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """
-        
+        modify cache data
         """
         valuecache = self.cache_data.get(key)
         if valuecache:
