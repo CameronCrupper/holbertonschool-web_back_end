@@ -9,17 +9,17 @@ from base_caching import BaseCaching
 
 class LIFOCache(BaseCaching):
     """
-    
+    inherits from Basecaching and is a caching system
     """
     def __init__(self):
         """
-        
+        calling parent init
         """
         super().__init__()
 
     def put(self, key, item):
         """
-        
+        modifying cache data
         """
         if key or item is not None:
             valuecache = self.get(key)
@@ -35,7 +35,7 @@ class LIFOCache(BaseCaching):
 
     def get(self, key):
         """
-        
+        modifys cache data
         """
         valuecache = self.cache_data.get(key)
         return valuecache
