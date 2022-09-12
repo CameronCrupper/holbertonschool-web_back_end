@@ -38,6 +38,7 @@ class Server:
         pagination: List = self.dataset()
         return (pagination[range[0]:range[1]])
 
+
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     returns tuple of size two that contains a start index and
