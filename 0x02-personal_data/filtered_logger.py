@@ -5,8 +5,9 @@ Regex-ing
 
 import re
 from typing import List
-from re import sub
 import logging
+import os
+import mysql.connector
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
@@ -60,3 +61,23 @@ def get_logger() -> logging.Logger:
     log.addHandler(stream_handler)
 
     return log
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Get a point of connection toward the database
+        Return:
+            A connection toward the database
+    """
+    username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
+    passw = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
+    hosting = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost')
+    db = os.getenv('PERSONAL_DATA_DB_NAME')
+
+    medb = mysql.connector.connect(
+        host=hosting,
+        username=username,
+        password=passw,
+        database=db
+    )
+
+    return medb
