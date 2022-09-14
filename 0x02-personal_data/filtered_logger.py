@@ -32,13 +32,13 @@ class RedactingFormatter(logging.Formatter):
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
-                    separator: str) -> str:
+                 separator: str) -> str:
     """
     returns log message obfuscated
     """
     for field in fields:
         message = re.sub(f'{field}=.+?{separator}',
-                            f'{field}={redaction}{separator}', message)
+                         f'{field}={redaction}{separator}', message)
     return message
 
 
