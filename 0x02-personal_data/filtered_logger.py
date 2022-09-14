@@ -64,9 +64,9 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    """Get a point of connection toward the database
-        Return:
-            A connection toward the database
+    """
+    Get a point of connection toward the database
+    Return: A connection toward the database
     """
     username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
     passw = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
@@ -81,3 +81,33 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     )
 
     return medb
+
+
+def main():
+    """
+    Entry Point
+    """
+    db: mysql.connector.connection.MySQLConnection = get_db()
+    cursor = db.cursor()
+    headers: Tuple = (head[0] for head in cursor.description)
+    cursor.execute("SELECT name, email, phone, ssn, password FROM users;")
+    log: logging.Logger = get_logger()
+
+    for row in cursor:
+        """
+        zip Element combine two tuples to generate
+        a new tuple combined
+        """
+        for row in cursor:
+            data_row: str = ''
+            for key, value in zip(headers, row):
+                data_row = ''.join(f'{key}={str(value)};')
+
+            log.info(data_row)
+
+    cursor.close()
+    db.close()
+
+
+if __name__ == '__main__':
+    main()
