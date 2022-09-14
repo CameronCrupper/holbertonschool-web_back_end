@@ -7,7 +7,7 @@ Encrypting Passwords
 import bcrypt
 
 
-def hash_password(password: str = '') ->bytes:
+def hash_password(password: str = '') -> bytes:
     """
     expects one string arg name password and
     returns a salted, hashed password, which
