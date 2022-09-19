@@ -13,18 +13,20 @@ from models.user import User
 class BasicAuth(Auth):
     """class to define authorization"""
 
-    def extract_user_credentials(self, decoded_base64_authorization_header: str) -> (str, str):
-            """
-            basic user credentials
-            """
-            if decoded_base64_authorization_header is None:
-                return None, None
-            if not isinstance(decoded_base64_authorization_header, str):
-                return None, None
-            if ':' in decoded_base64_authorization_header:
-                return decoded_base64_authorization_header.split(':')
-            else:
-                return None, None
+    def extract_user_credentials(self,
+                                 decoded_base64_authorization_header:
+                                 str) -> (str, str):
+        """
+        basic user credentials
+        """
+        if decoded_base64_authorization_header is None:
+            return None, None
+        if not isinstance(decoded_base64_authorization_header, str):
+            return None, None
+        if ':' in decoded_base64_authorization_header:
+            return decoded_base64_authorization_header.split(':')
+        else:
+            return None, None
 
     def decode_base64_authorization_header(self,
                                            base64_authorization_header:
