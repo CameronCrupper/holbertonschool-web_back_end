@@ -12,8 +12,9 @@ from models.user import User
 
 class BasicAuth(Auth):
     """class to define authorization"""
-    def decode_base64_authorization_header(self, 
-                                           base64_authorization_header: str) -> str:
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header:
+                                           str) -> str:
         """
         base64 decode
         """
