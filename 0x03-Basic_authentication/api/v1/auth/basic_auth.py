@@ -5,8 +5,8 @@
 from flask import request
 from typing import List, TypeVar
 from api.v1.auth.auth import Auth
-import base64 import b64decode
 import re
+from base64 import b64decode
 from models.user import User
 
 
