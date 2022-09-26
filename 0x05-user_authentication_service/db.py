@@ -5,6 +5,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 
 from user import Base, User
 
@@ -38,3 +40,26 @@ class DB:
         self._session.add(new_user)
         self._session.commit()
         return new_user
+
+    def find_user_by(self, **kwargs) -> User:
+        """
+            Find user based in composition of your features
+            Args:
+                kwargs: Arbitrary dict with features
+            Return:
+                User found or error name
+        """
+        if not kwargs:
+            raise InvalidRequestError
+
+        cols_keys = User.__table__.columns.keys()
+        for key in kwargs.keys():
+            if key not in cols_keys:
+                raise InvalidRequestError
+
+        users = self._session.query(User).filter_by(**kwargs).first()
+
+        if users is None:
+            raise NoResultFound
+
+        return users
