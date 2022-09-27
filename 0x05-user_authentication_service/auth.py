@@ -2,7 +2,7 @@
 """
 password encrypt
 """
-from bcrypt import hashpw, gensalt
+from bcrypt import hashpw, gensalt, checkpw
 from db import DB
 from user import User
 from uuid import uuid4
@@ -15,6 +15,14 @@ def _hash_password(password: str) -> bytes:
     """
     return hashpw(password.encode('utf8'), gensalt())
 
+def _generate_uuid() -> str:
+    """ Generate uuid
+        Return:
+            uuid in string
+    """
+    UUID = uuid4()
+
+    return str(UUID)
 
 class Auth:
     """Auth class to interact with the authentication database.
@@ -36,3 +44,15 @@ class Auth:
             user = self._db.add_user(email, passwd)
 
         return user
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """
+        validating credentials
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return False
+        if checkpw(password.encode('utf-8'), user.hashed_password):
+            return True
+        return False
