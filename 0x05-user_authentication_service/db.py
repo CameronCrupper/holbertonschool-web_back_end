@@ -66,7 +66,7 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """
-        
+        updates user
         """
         if not kwargs:
             return None
@@ -74,7 +74,7 @@ class DB:
         user = self.find_user_by(id=user_id)
         cols_keys = User.__table__.columns.keys()
         for key in kwargs.keys():
-            if  key not in cols_keys:
+            if key not in cols_keys:
                 raise ValueError
         for key, value in kwargs.items():
             setattr(user, key, value)
