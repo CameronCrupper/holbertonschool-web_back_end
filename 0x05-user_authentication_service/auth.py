@@ -15,6 +15,7 @@ def _hash_password(password: str) -> bytes:
     """
     return hashpw(password.encode('utf8'), gensalt())
 
+
 class Auth:
     """Auth class to interact with the authentication database.
     """
