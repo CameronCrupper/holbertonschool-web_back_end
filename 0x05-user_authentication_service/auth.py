@@ -98,7 +98,7 @@ class Auth:
         except ValueError:
             return None
 
-def get_reset_password_token(self, email: str) -> str:
+    def get_reset_password_token(self, email: str) -> str:
         """
         fins corresponding email and generates uuid
         """
@@ -108,4 +108,3 @@ def get_reset_password_token(self, email: str) -> str:
             raise ValueError
         user.reset_token = str(uuid4())
         return user.reset_token
-
