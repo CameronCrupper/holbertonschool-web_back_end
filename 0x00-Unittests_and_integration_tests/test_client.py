@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-
+Test Client
 """
 from unittest.mock import patch, PropertyMock, Mock
 import json
@@ -11,7 +11,7 @@ from parameterized import parameterized, parameterized_class
 
 class GithubOrgClient(unittest.TestCase):
     """
-    
+    parameterize and patch as decorator
     """
     @parameterized.expand([
         ('google'),
@@ -20,7 +20,7 @@ class GithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_org(self, input, mock):
         """
-        
+        testing githuborg
         """
         test_class = GithubOrgClient(input)
         test_class.org()
@@ -28,7 +28,7 @@ class GithubOrgClient(unittest.TestCase):
 
     def test_public_repos_url(self):
         """
-        
+        testing public repos
         """
         with patch('client.GithubOrgClient.org',
                    new_callable=PropertyMock) as mock:
@@ -41,7 +41,7 @@ class GithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mock_json):
         """
-        
+        testing public repos for json
         """
         json_payload = [{"name": "Google"}, {"name": "Twitter"}]
         mock_json.return_value = json_payload
@@ -65,7 +65,7 @@ class GithubOrgClient(unittest.TestCase):
     ])
     def test_has_license(self, repo, license_key, expected):
         """
-        
+        testing if it has a license
         """
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
@@ -77,13 +77,13 @@ class GithubOrgClient(unittest.TestCase):
 )
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """
-    
+    testing github org client
     """
 
     @classmethod
     def setUpClass(cls):
         """
-        
+        setting up class
         """
         conf = {'return_value.json.side_effect':
                 [
@@ -97,7 +97,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     def test_public_repos(self):
         """
-        
+        testing public repos
         """
         test_class = GithubOrgClient("google")
 
@@ -109,7 +109,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     def test_public_repos_with_license(self):
         """
-        
+        testing repos for licnese
         """
         test_class = GithubOrgClient("google")
 
@@ -122,6 +122,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         """
-        
+        stoping test
         """
         cls.get_patcher.stop()
