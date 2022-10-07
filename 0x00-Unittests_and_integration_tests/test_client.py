@@ -9,6 +9,7 @@ from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
 from parameterized import parameterized, parameterized_class
 
+
 class GithubOrgClient(unittest.TestCase):
     """
     parameterize and patch as decorator
