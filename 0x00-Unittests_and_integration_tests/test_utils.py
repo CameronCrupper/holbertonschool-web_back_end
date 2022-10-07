@@ -24,6 +24,7 @@ class TestAccessNestedMap(unittest.TestCase):
         test access nested map
         """
         self.assertEqual(access_nested_map(nested_map, path_map), result_expec)
+
     @parameterized.expand([
         ({}, ("a",)),
         ({"a": 1}, ("a", "b"))
@@ -73,6 +74,7 @@ class TestMemoize(unittest.TestCase):
                 a method
                 """
                 return 42
+
             @memoize
             def a_property(self):
                 """
