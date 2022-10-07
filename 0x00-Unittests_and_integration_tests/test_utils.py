@@ -20,12 +20,12 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
 
+
     def test_access_nested_map(self, nested_map, path_map, result_expec):
         """
         test access nested map
         """
         self.assertEqual(access_nested_map(nested_map, path_map), result_expec)
-
     @parameterized.expand([
         ({}, ("a",)),
         ({"a": 1}, ("a", "b"))
@@ -38,6 +38,7 @@ class TestAccessNestedMap(unittest.TestCase):
             access_nested_map(nested_map, path_map)
         self.assertEqual(
             f'KeyError({str(error.exception)})', repr(error.exception))
+
 
 class TestGetJson(unittest.TestCase):
     """
@@ -55,6 +56,7 @@ class TestGetJson(unittest.TestCase):
             mock_request.return_value.json.return_value = test_payload
             self.assertEqual(get_json(url=test_url), test_payload)
 
+
 class TestMemoize(unittest.TestCase):
     """
     test memoize
@@ -67,6 +69,7 @@ class TestMemoize(unittest.TestCase):
             """
             test class
             """
+
             def a_method(self):
                 """
                 a method
