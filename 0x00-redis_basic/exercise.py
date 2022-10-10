@@ -23,6 +23,7 @@ def count_calls(method: Callable = None) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
     """
     Call History Decorator
@@ -38,6 +39,7 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(method.__qualname__ + ":outputs", output)
         return output
     return wrapper
+
 
 def replay(func: Callable):
     """
@@ -87,7 +89,8 @@ class Cache():
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int, float]:
+    def get(self, key: str, fn: Callable = None) ->\
+            Union[str, bytes, int, float]:
         """
         reading from redis and recovering original type
         """
