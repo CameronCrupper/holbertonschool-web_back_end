@@ -96,3 +96,19 @@ class Cache():
             return fn(key)
         return key
 
+    def get_str(self, key: str) -> str:
+        """
+        parameterized get string
+        """
+        return self._redis.get(key).decode('UTF-8')
+
+    def get_int(self, key: str) -> int:
+        """
+        parameterized get int
+        """
+        value = self.redis.get(key)
+        try:
+            value = int(value.decode('UTF-8'))
+        except Exception:
+            value = 0
+        return value
