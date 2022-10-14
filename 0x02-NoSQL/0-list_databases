@@ -1,1 +1,3 @@
-show dbs
+// Show all database
+
+show dbs;
