@@ -1,22 +1,22 @@
 'use strict';
 const express = require('express');
 const app = express();
-const port = 7865;
 
-app.get('/', (req, res) => res.end('Welcome to the payment system'))
-app.get('/cart/:id([0-9]+)', (req, res) => {
-  res.end(`Payment methods for cart ${req.params.id}`)
-})
-app.get('/available_payments', (req, res) => {
-  const obj = {
-    payment_methods: {
-      credit_cards: true,
-      paypal: false,
-    },
-  };
-  res.json(obj);
+app.get('/', (request, response) => {
+	response.send('Welcome to the payment system');
+}).get('/cart/:id([0-9]*)', (request, response) => {
+	response.send(`Payment methods for cart ${request.params.id}`);
+}).get('/available_payments', (request, response) => {
+	response.json({
+		payment_methods: {
+			credit_cards: true,
+			paypal: false
+		}
+	});
+}).use(express.json()).post('/login', (request, response) => {
+	response.send(`Welcome ${request.body.userName}`);
+}).listen(7865, () => {
+	console.log('API available on localhost port 7865')
 });
-app.post('/login', (req, res) => {
-  res.end(`Welcome ${req.body.userName}`);
-});
-app.listen(port, () => console.log(`API available on localhost port ${port}`));
+
+module.exports = app;
